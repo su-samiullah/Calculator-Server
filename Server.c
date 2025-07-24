@@ -60,14 +60,16 @@ void* RecieveData(void *str) {
     int choice = 0;
     char menu[1024];
     char result[1024];
-
+    char ack_buf[8];	
     // Receive client's name
     memset(clientName, 0, sizeof(clientName));
     recv(clientSocketFD, clientName, sizeof(clientName), 0);
     printf("Client connected: %s\n", clientName);  // Print client's name on connection
 
     while(1) {
-        // Send menu to the client
+        memset(ack_buf, 0, sizeof(ack_buf));
+	recv(clientSocketFD, ack_buf, sizeof(ack_buf), 0);
+	    // Send menu to the client
         memset(menu, 0, sizeof(menu));
         strcpy(menu, "Press:\n1. For Addition\n2. For Subtraction\n3. For Multiplication\n4. For Division\n5. Exit\n");
         send(clientSocketFD, menu, strlen(menu), 0);

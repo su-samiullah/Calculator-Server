@@ -41,7 +41,8 @@ int main() {
     send(sock, clientName, strlen(clientName) + 1, 0);  // Send name with null terminator
 
     while (1) {
-        // Clear the buffer to avoid garbage value
+       send(sock, "ACK", 3, 0);
+	    // Clear the buffer to avoid garbage value
         memset(buffer, 0, sizeof(buffer));
 
         // Receive and print the menu from the server
